@@ -18,6 +18,13 @@ exports.handler = function (event, context, callback) {
         });
     };
 
+    if(!event.queryStringParameters) {
+        return response({
+            message: 'No input was specified. Please specify either the ' +
+            '`html_base64` or `url` parameter and try again'
+        }, 422);
+    }
+
     const {html_base64, url} = event.queryStringParameters;
 
     // Check to ensure we have at least one input
